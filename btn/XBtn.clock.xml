@@ -1,0 +1,39 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="../../worldxml/ui.xsd"> 
+	<Frame name="XBarClock" parent="UIParent" frameStrata="BACKGROUND" frameLevel="1">
+		<Size><AbsDimension x="128" y="32"/></Size>
+		<Anchors><Anchor point="LEFT" relativeTo="XBarFrame" relativePoint="LEFT"><Offset>
+			<AbsDimension x="920" y="0"/></Offset></Anchor></Anchors>
+		<Scripts>
+			<OnUpdate>if d303Fix or ffp or (MorphClock and MorphClock:IsValid()) then XBarClock_OnUpdate(this,elapsedTime); end</OnUpdate>
+		</Scripts>
+	</Frame>
+	<Frame name="XBarClock_BG" inherits="XButton_BGTemp" parent="XBarFrame">
+		<Anchors><Anchor point="LEFT" relativeTo="XBarClock" relativePoint="LEFT"><Offset>
+			<AbsDimension x="-28" y="0"/></Offset></Anchor></Anchors>
+	</Frame>
+	<Button name="XBarClock_B" inherits="XButton_BTemp" parent="XBarClock">
+		<Anchors><Anchor point="LEFT" relativeTo="XBarClock" relativePoint="LEFT"/></Anchors>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parent_Icon" file="Interface\Icons\elf_skill\Skill_ward16-1">
+					<Size><AbsDimension x="20" y="20"/></Size>
+					<Anchors><Anchor point="TOPLEFT"/></Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>XBarClock_OnClick(key,XBarClock);</OnClick>
+			<OnDragStart>XBar_MoveStart(XBarClock); XBarClock_B_Icon:SetTexture("interface/icons/Skill_aug42-1");</OnDragStart>
+			<OnDragStop>XBar_MoveEnd(XBarClock); XBarClock_B_Icon:SetTexture("interface/icons/elf_skill/Skill_ward16-1");</OnDragStop>
+			<OnEnter>XBarClock_OnEnter(this);</OnEnter>
+			<OnLeave>
+				XBarClock_B_Icon:SetTexture("interface/icons/elf_skill/Skill_ward16-1");
+				GameTooltip:Hide();
+			</OnLeave>
+		</Scripts>
+	</Button>
+	<Frame name="XBarClock_F" inherits="XButton_FTemp" parent="XBarClock">
+		<Anchors><Anchor point="TOPLEFT" relativeTo="XBarClock" relativePoint="TOPLEFT"><Offset>
+			<AbsDimension x="26" y="3"/></Offset></Anchor></Anchors>
+	</Frame>
+</Ui>

@@ -1,0 +1,43 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="../../worldxml/ui.xsd">
+	<Frame name="XBarGuild" parent="UIParent" frameStrata="BACKGROUND" frameLevel="1">
+		<Size><AbsDimension x="128" y="32"/></Size>
+		<Anchors><Anchor point="LEFT" relativeTo="XBarFrame" relativePoint="LEFT"><Offset>
+			<AbsDimension x="660" y="0"/></Offset></Anchor></Anchors>
+		<Scripts>
+			<OnEvent>XBarGuild_OnEvent(this,event);</OnEvent>
+			<OnShow>XBarGuild_OnEvent(this,"LOADED");</OnShow>
+			<OnHide>
+				this:UnregisterEvent("UPDATE_GUILD_MEMBER");
+				this:UnregisterEvent("UPDATE_GUILD_MEMBER_INFO");
+			</OnHide>
+		</Scripts>
+	</Frame>
+	<Frame name="XBarGuild_BG" inherits="XButton_BGTemp" parent="XBarFrame">
+		<Anchors><Anchor point="LEFT" relativeTo="XBarGuild" relativePoint="LEFT"><Offset>
+			<AbsDimension x="-28" y="0"/></Offset></Anchor></Anchors>
+	</Frame>
+	<Button name="XBarGuild_B" inherits="XButton_BTemp" parent="XBarGuild">
+		<Anchors><Anchor point="LEFT" relativeTo="XBarGuild" relativePoint="LEFT"/></Anchors>
+		<NormalTexture file="Interface/Icons/Skill_Mag_New20-5"/>
+		<PushedTexture file="Interface/Icons/Skill_Mag_New50-4"/>
+		<HighlightTexture file="Interface/Icons/Skill_Mag_New20-4" alphaMode="ADD"/>
+		<Scripts>
+			<OnClick>
+				if key=="LBUTTON" then
+					PlaySoundByPath("sound/interface/ui_generic_click.mp3"); XBarGuild_OnClick(key);
+				elseif GuildPanel and GetNumGuildMembers()>0 then
+					XBar_ToggleUI(GuildPanelFrame);
+				else
+					XBar_ToggleUI(GuildFrame);
+				end
+			</OnClick>
+			<OnDragStart>XBar_MoveStart(XBarGuild);</OnDragStart>
+			<OnDragStop>XBar_MoveEnd(XBarGuild);</OnDragStop>
+			<OnEnter>XBarGuild_OnEnter(this);</OnEnter>
+		</Scripts>
+	</Button>
+	<Frame name="XBarGuild_F" inherits="XButton_FTemp" parent="XBarGuild">
+		<Anchors><Anchor point="TOPLEFT" relativeTo="XBarGuild" relativePoint="TOPLEFT"><Offset>
+			<AbsDimension x="26" y="3"/></Offset></Anchor></Anchors>
+	</Frame>
+</Ui>

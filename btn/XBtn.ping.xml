@@ -1,0 +1,40 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="../../worldxml/ui.xsd"> 
+	<Frame name="XBarPing" parent="UIParent" frameStrata="BACKGROUND" frameLevel="1">
+		<Size><AbsDimension x="128" y="32"/></Size>
+		<Anchors><Anchor point="LEFT" relativeTo="XBarFrame" relativePoint="LEFT"><Offset>
+			<AbsDimension x="835" y="0"/></Offset></Anchor></Anchors>
+		<Scripts>
+			<OnUpdate>XBarPing_OnUpdate(this,elapsedTime);</OnUpdate>
+		</Scripts>
+	</Frame>
+	<Frame name="XBarPing_BG" inherits="XButton_BGTemp" parent="XBarFrame">
+		<Anchors><Anchor point="LEFT" relativeTo="XBarPing" relativePoint="LEFT"><Offset>
+			<AbsDimension x="-28" y="0"/></Offset></Anchor></Anchors>
+	</Frame>
+	<Button name="XBarPing_B" inherits="XButton_BTemp" parent="XBarPing">
+		<Anchors><Anchor point="LEFT" relativeTo="XBarPing" relativePoint="LEFT"/></Anchors>
+		<NormalTexture file="Interface/Icons/Sys_Home04"/>
+		<PushedTexture file="Interface/Icons/Sys_Home03"/>
+		<HighlightTexture file="Interface/Icons/Sys_Home03" alphaMode="ADD"/>
+		<Scripts>
+			<OnClick>
+				if key=="LBUTTON" then
+					if XAFKVERSION then
+						XAFK_Toggle();
+					else
+						XBar_ToggleUI(TeleportBook);
+					end
+				else
+					XBar_ToggleUI(NpcTrackFrame);
+				end
+			</OnClick>
+			<OnDragStart>XBar_MoveStart(XBarPing);</OnDragStart>
+			<OnDragStop>XBar_MoveEnd(XBarPing);</OnDragStop>
+			<OnEnter>XBarPing_OnEnter(this);</OnEnter>
+		</Scripts>
+	</Button>
+	<Frame name="XBarPing_F" inherits="XButton_FTemp" parent="XBarPing">
+		<Anchors><Anchor point="TOPLEFT" relativeTo="XBarPing" relativePoint="TOPLEFT"><Offset>
+			<AbsDimension x="26" y="3"/></Offset></Anchor></Anchors>
+	</Frame>
+</Ui>

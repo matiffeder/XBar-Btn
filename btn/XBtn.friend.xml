@@ -1,0 +1,44 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="../../worldxml/ui.xsd"> 
+	<Frame name="XBarFriend" parent="UIParent" frameStrata="BACKGROUND" frameLevel="1">
+		<Size><AbsDimension x="128" y="32"/></Size>
+		<Anchors><Anchor point="LEFT" relativeTo="XBarFrame" relativePoint="LEFT"><Offset>
+			<AbsDimension x="690" y="0"/></Offset></Anchor></Anchors>
+		<Scripts>
+			<OnEvent>XBarFriend_OnEvent(this,event);</OnEvent>
+			<OnShow>XBarFriend_OnEvent(this,"LOADED");</OnShow>
+			<OnHide>this:UnregisterEvent("RESET_FRIEND");</OnHide>
+		</Scripts>
+	</Frame>
+	<Frame name="XBarFriend_BG" inherits="XButton_BGTemp" parent="XBarFrame">
+		<Anchors><Anchor point="LEFT" relativeTo="XBarFriend" relativePoint="LEFT"><Offset>
+			<AbsDimension x="-28" y="0"/></Offset></Anchor></Anchors>
+	</Frame>
+	<Button name="XBarFriend_B" inherits="XButton_BTemp" parent="XBarFriend">
+		<Anchors><Anchor point="LEFT" relativeTo="XBarFriend" relativePoint="LEFT"/></Anchors>
+		<NormalTexture file="Interface/Icons/Emo_Wave"/>
+		<PushedTexture file="Interface/Icons/Emo_Laugh"/>
+		<HighlightTexture file="Interface/Icons/Emo_Laugh" alphaMode="ADD"/>
+		<Scripts>
+			<OnClick>
+				if key=="LBUTTON" then
+					PlaySoundByPath("sound/interface/ui_generic_click.mp3"); XBarFriend_OnClick(key);
+				else
+					XBar_ToggleUI(SocialFrame);
+				end
+			</OnClick>
+			<OnDragStart>XBar_MoveStart(XBarFriend);</OnDragStart>
+			<OnDragStop>XBar_MoveEnd(XBarFriend);</OnDragStop>
+			<OnEnter>
+				GameTooltip:SetOwner(this,"ANCHOR_TOPRIGHT", -180,0);
+				GameTooltip:SetText(XLng["Ttip"]["Friend1"]);
+				GameTooltip:AddLine(XLng["Ttip"]["Friend2"],0,.7,.9);
+				GameTooltip:AddSeparator();
+				GameTooltip:AddDoubleLine("|cffFFE855"..XLng["Ttip"]["Friend3"].."|r",XBarFriend_Info("OnlineCount").."/"..XBarFriend_Info("FriendCount"));
+			</OnEnter>
+		</Scripts>
+	</Button>
+	<Frame name="XBarFriend_F" inherits="XButton_FTemp" parent="XBarFriend">
+		<Anchors><Anchor point="TOPLEFT" relativeTo="XBarFriend" relativePoint="TOPLEFT"><Offset>
+			<AbsDimension x="26" y="3"/></Offset></Anchor></Anchors>
+	</Frame>
+</Ui>

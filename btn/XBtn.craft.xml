@@ -1,0 +1,41 @@
+<Ui xmlns="http://www.runewaker.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="../../worldxml/ui.xsd"> 
+	<Frame name="XBarCraft" parent="UIParent" frameStrata="BACKGROUND" frameLevel="1">
+		<Size><AbsDimension x="128" y="32"/></Size>
+		<Anchors><Anchor point="LEFT" relativeTo="XBarFrame" relativePoint="LEFT"><Offset>
+			<AbsDimension x="720" y="0"/></Offset></Anchor></Anchors>
+		<Scripts>
+			<OnEvent>XBarCraft_OnEvent(this,event);</OnEvent>
+			<OnShow>XBarCraft_OnEvent(this,"LOADED");</OnShow>
+			<OnHide>
+				this:UnregisterEvent("PLAYER_LIFESKILL_CHANGED");
+				this:UnregisterEvent("PLAYER_BAG_CHANGED");
+			</OnHide>
+		</Scripts>
+	</Frame>
+	<Frame name="XBarCraft_BG" inherits="XButton_BGTemp" parent="XBarFrame">
+		<Anchors><Anchor point="LEFT" relativeTo="XBarCraft" relativePoint="LEFT"><Offset>
+			<AbsDimension x="-28" y="0"/></Offset></Anchor></Anchors>
+	</Frame>
+	<Button name="XBarCraft_B" inherits="XButton_BTemp" parent="XBarCraft">
+		<Anchors><Anchor point="LEFT" relativeTo="XBarCraft" relativePoint="LEFT"/></Anchors>
+		<NormalTexture file="Interface/Icons/item_tr_08"/>
+		<PushedTexture file="Interface/Icons/item_tr_09"/>
+		<HighlightTexture file="Interface/Icons/item_tr_09" alphaMode="ADD"/>
+		<Scripts>
+			<OnClick>
+				if key=="LBUTTON" then
+					XBar_ToggleUI(MagicBoxFrame);
+				else
+					XBar_ToggleUI(DrawRuneFrame);
+				end
+			</OnClick>
+			<OnDragStart>XBar_MoveStart(XBarCraft);</OnDragStart>
+			<OnDragStop>XBar_MoveEnd(XBarCraft);</OnDragStop>
+			<OnEnter>XBarCraft_OnEnter(this);</OnEnter>
+		</Scripts>
+	</Button>
+	<Frame name="XBarCraft_F" inherits="XButton_FTemp" parent="XBarCraft">
+		<Anchors><Anchor point="TOPLEFT" relativeTo="XBarCraft" relativePoint="TOPLEFT"><Offset>
+			<AbsDimension x="26" y="3"/></Offset></Anchor></Anchors>
+	</Frame>
+</Ui>
